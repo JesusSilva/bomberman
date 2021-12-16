@@ -1,1 +1,85 @@
-# bomberman
+# Bomberman 
+>Link al juego: https://jesussilva.github.io/bomberman/
+#
+### Descripción del proyecto
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Luctus venenatis lectus magna fringilla urna porttitor rhoncus. Auctor eu augue ut lectus arcu. At volutpat diam ut venenatis. Eu mi bibendum neque egestas. Donec et odio pellentesque diam. Sed arcu non odio euismod lacinia at quis risus sed. Massa id neque aliquam vestibulum morbi blandit cursus. Sit amet facilisis magna etiam tempor orci eu lobortis elementum. Eget arcu dictum varius duis at consectetur lorem donec massa. Egestas integer eget aliquet nibh praesent tristique. Sit amet mauris commodo quis imperdiet. Nunc sed velit dignissim sodales ut eu sem. Volutpat sed cras ornare arcu. Nulla at volutpat diam ut venenatis. Consequat mauris nunc congue nisi vitae. In ornare quam viverra orci sagittis. Adipiscing diam donec adipiscing tristique.
+
+In pellentesque massa placerat duis ultricies. Ullamcorper eget nulla facilisi etiam dignissim. Condimentum vitae sapien pellentesque habitant morbi tristique. Quam adipiscing vitae proin sagittis nisl rhoncus mattis. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere ac. Vel fringilla est ullamcorper eget. Habitasse platea dictumst quisque sagittis purus sit. Gravida neque convallis a cras semper auctor. Vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt. Leo integer malesuada nunc vel risus commodo viverra maecenas. Mattis vulputate enim nulla aliquet. Neque egestas congue quisque egestas diam in arcu cursus. Erat nam at lectus urna duis convallis convallis tellus id. Mi quis hendrerit dolor magna eget. Sit amet porttitor eget dolor morbi non arcu risus quis. Non consectetur a erat nam.
+
+Nulla facilisi morbi tempus iaculis urna id volutpat lacus laoreet. Quisque egestas diam in arcu cursus euismod quis. Ornare aenean euismod elementum nisi quis eleifend. Nunc sed velit dignissim sodales ut. Porta lorem mollis aliquam ut porttitor. Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat. Molestie nunc non blandit massa. Massa id neque aliquam vestibulum morbi blandit cursus. Etiam non quam lacus suspendisse faucibus interdum posuere. A pellentesque sit amet porttitor eget dolor.
+
+Id nibh tortor id aliquet lectus. Proin nibh nisl condimentum id venenatis a condimentum. Lectus magna fringilla urna porttitor. Imperdiet sed euismod nisi porta lorem mollis. Turpis egestas pretium aenean pharetra magna ac placerat. Egestas egestas fringilla phasellus faucibus scelerisque eleifend. Feugiat in ante metus dictum at tempor commodo ullamcorper a. Sed blandit libero volutpat sed cras ornare arcu. Convallis aenean et tortor at risus viverra adipiscing. Gravida rutrum quisque non tellus orci. Dictumst quisque sagittis purus sit amet. Volutpat maecenas volutpat blandit aliquam. Rhoncus dolor purus non enim praesent elementum. Facilisis mauris sit amet massa vitae tortor condimentum lacinia quis. A iaculis at erat pellentesque adipiscing commodo elit. Enim ut sem viverra aliquet eget sit amet tellus.
+
+Pulvinar etiam non quam lacus suspendisse. Pharetra diam sit amet nisl suscipit adipiscing bibendum est ultricies. In nibh mauris cursus mattis. Enim nunc faucibus a pellentesque sit. Et netus et malesuada fames. Tincidunt eget nullam non nisi. Dictum at tempor commodo ullamcorper a lacus. Diam maecenas sed enim ut sem viverra aliquet eget. Nam at lectus urna duis convallis. Turpis egestas maecenas pharetra convallis posuere. Senectus et netus et malesuada fames ac turpis egestas maecenas. Vitae aliquet nec ullamcorper sit. Posuere morbi leo urna molestie. Interdum consectetur libero id faucibus nisl tincidunt eget nullam non. Maecenas sed enim ut sem viverra aliquet eget sit amet. Sed enim ut sem viverra aliquet eget. Vitae tempus quam pellentesque nec. Eu scelerisque felis imperdiet proin. Eleifend mi in nulla posuere. Luctus venenatis lectus magna fringilla urna porttitor rhoncus.
+#
+### Requerimientos
+- Juego basado en el proyecto `w6d5-canvas-car`
+- Hay que usar parcel
+- Mínimo typescript en el 50% de los ficheros
+- Tiene que tener un `README.md` que explique el juego y las dificultades técnicas
+- El readme tiene que tener imágenes
+- Desplegar el juego en github pages compilandolo con `parcel`
+- Completar los campos "Desription" y "website" del repo en github
+- Entregar el juego en github pages `<usuario>.github.io/<repositorio>`
+#
+### Imagen del juego a crear:
+![Imagen del juego](https://i.imgur.com/pzgW3ht.png)
+#
+### Sprites a utilizar para la representación del juego:
+![Imgur](https://i.imgur.com/nXofEnQ.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Instalación
+Instalar las dependencias y dependencias de desarrollo, iniciar el servidor.
+
+```sh
+git clone https://github.com/JesusSilva/bomberman.git
+cd bomberman
+yarn run dev
+```
+
+### Plugins
+
+| Plugin | README |
+| ------ | ------ |
+| Lodash | https://www.npmjs.com/package/lodash |
+
+
+### Development
+Comando para ejecutar el juego:
+
+```sh
+yarn run dev
+```
+
+### Building
+
+For production release:
+
+```sh
+yarn run build
+```
+
+### License
+***GNU GPL***
