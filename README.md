@@ -53,12 +53,12 @@ cd bomberman
 yarn run dev
 ```
 
-### Plugins
+### Librerias
 
-| Plugin | README |
-| ------ | ------ |
-| Lodash | https://www.npmjs.com/package/lodash |
-
+| Plugin | Link | Uso |
+| ------ | ------ | ------ |
+| Lodash | https://www.npmjs.com/package/lodash | Facilitar operaciones con arrays u objetos                       |
+| Rxjs   | https://www.npmjs.com/package/rxjs   | Usar observables para evitar la ejecución constante de funciones |
 
 ### Development
 Comando para ejecutar el juego:
