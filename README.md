@@ -3,12 +3,23 @@
 #
 
 ![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/jesussilva/bomberman/main?color=blue&style=for-the-badge)
-![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/jesussilva/bomberman/fastify?color=ff69b4&logo=fastify&style=for-the-badge)
 ![npm type definitions](https://img.shields.io/npm/types/typescript?logo=typescript&logoColor=white&style=for-the-badge)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/jesussilva/bomberman?color=blueviolet&label=CODE%20SIZE&logo=github&style=for-the-badge)
 ![GitHub](https://img.shields.io/github/license/jesussilva/bomberman?logo=linux&logoColor=white&style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/jesussilva/bomberman?color=success&logo=github&logoColor=white&style=for-the-badge)
 
+### Issues
+![GitHub issues](https://img.shields.io/github/issues/jesussilva/bomberman?logo=github&style=for-the-badge)
+![GitHub issues by-label](https://img.shields.io/github/issues/jesussilva/bomberman/report?color=DE874C&logo=github&style=for-the-badge)
+![GitHub issues by-label](https://img.shields.io/github/issues/jesussilva/bomberman/epic?color=FB6942&logo=github&style=for-the-badge)
+![GitHub issues by-label](https://img.shields.io/github/issues/jesussilva/bomberman/zero-energy?color=B1BF22&logo=github&style=for-the-badge)
+![GitHub issues by-label](https://img.shields.io/github/issues/jesussilva/bomberman/low-energy?color=FB6942&logo=github&style=for-the-badge)
+![GitHub issues by-label](https://img.shields.io/github/issues/jesussilva/bomberman/middle-energy?color=135DE3&logo=github&style=for-the-badge)
+![GitHub issues by-label](https://img.shields.io/github/issues/jesussilva/bomberman/high-energy?color=A932F7&logo=github&style=for-the-badge)
+![GitHub issues by-label](https://img.shields.io/github/issues/jesussilva/bomberman/bug?color=d73a4a&logo=github&style=for-the-badge)
+![GitHub issues by-label](https://img.shields.io/github/issues/jesussilva/bomberman/help-wanted?color=008672&logo=github&style=for-the-badge)
+![GitHub issues by-label](https://img.shields.io/github/issues/jesussilva/bomberman/question?color=d876e3&logo=github&style=for-the-badge)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/jesussilva/bomberman?color=yellow&logo=github&style=for-the-badge)
 #
 
 <p align="center">
