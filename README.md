@@ -28,10 +28,13 @@
 
 
 ### Descripción del proyecto
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Luctus venenatis lectus magna fringilla urna porttitor rhoncus. Auctor eu augue ut lectus arcu. At volutpat diam ut venenatis. Eu mi bibendum neque egestas. Donec et odio pellentesque diam. Sed arcu non odio euismod lacinia at quis risus sed. Massa id neque aliquam vestibulum morbi blandit cursus. Sit amet facilisis magna etiam tempor orci eu lobortis elementum. Eget arcu dictum varius duis at consectetur lorem donec massa. Egestas integer eget aliquet nibh praesent tristique. Sit amet mauris commodo quis imperdiet. Nunc sed velit dignissim sodales ut eu sem. Volutpat sed cras ornare arcu. Nulla at volutpat diam ut venenatis. Consequat mauris nunc congue nisi vitae. In ornare quam viverra orci sagittis. Adipiscing diam donec adipiscing tristique.
+Bomberman es un juego de estilo arcade-estratégico, donde el principal objetivo de este juego es pasar niveles usando bombas, que explotan unos segundos después de ser puestas, para destruir obstáculos y enemigos, Las explosiones de las bombas también pueden hacer explotar a otras bombas o accionar objetos, matar o herir al personaje del jugador, destruir potenciadores e incluso “enfadar” a la puerta de salida haciendo que esta haga aparecer mas enemigos.
 
-In pellentesque massa placerat duis ultricies. Ullamcorper eget nulla facilisi etiam dignissim. Condimentum vitae sapien pellentesque habitant morbi tristique. Quam adipiscing vitae proin sagittis nisl rhoncus mattis. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere ac. Vel fringilla est ullamcorper eget. Habitasse platea dictumst quisque sagittis purus sit. Gravida neque convallis a cras semper auctor. Vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt. Leo integer malesuada nunc vel risus commodo viverra maecenas. Mattis vulputate enim nulla aliquet. Neque egestas congue quisque egestas diam in arcu cursus. Erat nam at lectus urna duis convallis convallis tellus id. Mi quis hendrerit dolor magna eget. Sit amet porttitor eget dolor morbi non arcu risus quis. Non consectetur a erat nam.
+La mayoría de juegos del Bomberman incluyen un modo multijugador, donde varios oponentes luchan entre ellos y donde gana el que consiga sobrevivir. En este modo de juego se puede jugar contra oponentes controlados por la maquina o contra rivales humanos que estarán a tu lado insultando y demás. Este último modo es el mas divertido y hay versiones del juego en los que pueden participar hasta 10 personas jugando al mismo tiempo.
 #
+
+### Motivación
+La motivación que me lleva a desarrollar este juego, es que fue uno de los juegos arcades a los que mas hora dediqué de pequeño. 
 
 ### Niveles
 #### Nivel 1:
