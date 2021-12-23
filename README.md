@@ -33,6 +33,30 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 In pellentesque massa placerat duis ultricies. Ullamcorper eget nulla facilisi etiam dignissim. Condimentum vitae sapien pellentesque habitant morbi tristique. Quam adipiscing vitae proin sagittis nisl rhoncus mattis. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere ac. Vel fringilla est ullamcorper eget. Habitasse platea dictumst quisque sagittis purus sit. Gravida neque convallis a cras semper auctor. Vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt. Leo integer malesuada nunc vel risus commodo viverra maecenas. Mattis vulputate enim nulla aliquet. Neque egestas congue quisque egestas diam in arcu cursus. Erat nam at lectus urna duis convallis convallis tellus id. Mi quis hendrerit dolor magna eget. Sit amet porttitor eget dolor morbi non arcu risus quis. Non consectetur a erat nam.
 #
 
+### Niveles
+#### Nivel 1:
+![Imgur](https://i.imgur.com/mfpXof9.png)
+
+```js
+const map = [
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+];
+```
+
+
+
 ### Instalación y Ejecución
 Para descargarnos el juego, instalarlo y ejecutarlo, deberemos ejecutar los siguientes comandos.
 
