@@ -56,7 +56,10 @@ const map = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 ```
-![Imgur](https://i.imgur.com/mfpXof9.png)
+
+<p align="center">
+  <img src="https://i.imgur.com/mfpXof9.png" style="width: 100%">
+</p>
 
 
 ### Instalación y Ejecución
@@ -110,7 +113,9 @@ yarn run build
 
 #
 ### Sprites a utilizar para la representación del juego:
-![Imgur](https://i.imgur.com/nXofEnQ.png)
+<p align="center">
+  <img src="https://i.imgur.com/nXofEnQ.png" style="width: 100%">
+</p>
 
 ### License
 ***GNU GPL***
