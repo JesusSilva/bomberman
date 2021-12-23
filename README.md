@@ -23,7 +23,7 @@
 #
 
 <p align="center">
-  <img src="https://i.imgur.com/pzgW3ht.png">
+  <img src="https://i.imgur.com/pzgW3ht.png" style="width: 100%">
 </p>
 
 
@@ -38,7 +38,6 @@ La motivación que me lleva a desarrollar este juego, es que fue uno de los jueg
 
 ### Niveles
 #### Nivel 1:
-![Imgur](https://i.imgur.com/mfpXof9.png)
 
 ```js
 const map = [
@@ -57,7 +56,7 @@ const map = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 ```
-
+![Imgur](https://i.imgur.com/mfpXof9.png)
 
 
 ### Instalación y Ejecución
