@@ -4,6 +4,9 @@
   "main": "index.js",
   "repository": "git@github.com:JesusSilva/bomberman.git",
   "license": "MIT",
+  "scripts": {
+    "dev": "parcel index.html"
+  },
   "dependencies": {
     "lodash": "^4.17.21",
     "parcel": "^2.0.1",

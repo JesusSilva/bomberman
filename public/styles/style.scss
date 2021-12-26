@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Bomberman";
+  src: url("../fonts/bomberman.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+  background-image: url("../images/background.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#canvas {
+  background: white;
+  width: 950px;
+  height: 750px;
+}

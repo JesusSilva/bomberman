@@ -1,4 +1,5 @@
 {
+  "editor.tabSize": 2,
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
@@ -13,6 +14,7 @@
   },
   "files.exclude": {
     ".history": true,
-    "node_modules": true
+    ".parcel-cache": true,
+    "node_modules": true,
   }
 }
