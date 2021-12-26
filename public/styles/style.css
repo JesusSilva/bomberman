@@ -1,0 +1,38 @@
+@font-face {
+  font-family: "Bomberman";
+  src: url("../fonts/bomberman.ttf") format("truetype");
+  /* Safari, Android, iOS */
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+  background-image: url("../images/background.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#canvas {
+  background: white;
+  width: 950px;
+  height: 750px;
+}
+/*# sourceMappingURL=style.css.map */
