@@ -21,12 +21,9 @@ window.onload = () => {
     const delta = (time - lastFrame) / 1000
     lastFrame = time
 
-    actors.forEach((actor) => actor.update(delta))
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
     actors.forEach((actor: Actor) => {
-      ctx.save()
       actor.draw(delta, ctx)
-      ctx.restore()
+      actor.update(delta)
     })
     window.requestAnimationFrame(render)
   }
