@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Position } from './classes/Position'
 
 export class FPSviewer {
@@ -9,7 +10,9 @@ export class FPSviewer {
   draw(delta: number, ctx: CanvasRenderingContext2D) {
     const fps = (1 / delta).toFixed(0)
     ctx.font = '24px Bomberman'
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = 'white'
     ctx.fillText(`FPS:${fps}`, this.position.x, this.position.y)
   }
+
+  update(delta: number) {}
 }
