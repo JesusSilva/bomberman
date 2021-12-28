@@ -1,21 +1,13 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Position } from './Position'
 
-export interface IActor {
-  position: Position
-  update: (delta: number) => void
-  keyboard_event?: (key: string) => void
-  draw: (delta: number, ctx: CanvasRenderingContext2D) => void
-}
-
-export class Actor implements IActor {
+export class Actor {
   position: Position
   constructor(position: Position) {
     this.position = position
   }
-
-  update(delta: number) {}
-
   draw(delta: number, ctx: CanvasRenderingContext2D) {}
-
-  keyboard_event(key: string) {}
+  update(delta: number) {}
+  keyboard_event_down?(key: string): void {}
+  keyboard_event_up?(key: string): void {}
 }

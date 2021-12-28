@@ -1,37 +1,52 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Actor } from './classes/Actor'
 import { Position } from './classes/Position'
+import { Drawer } from './drawer'
+import { BombermanKey, KeyboardMap } from './utils/keyboard-map'
 
 export class Bomberman extends Actor {
   origin: Position
-  speed: number
+  keyboardMap: KeyboardMap
+  size: Position = { x: 50, y: 50 }
 
-  constructor(position: Position, speed: number) {
+  constructor(position: Position, keyboardMap: KeyboardMap) {
     super(position)
     this.origin = { x: position.x, y: position.y }
-    this.speed = speed
+    this.keyboardMap = keyboardMap
   }
 
-  update(delta: number) {}
+  keyboard_event_down(key: string) {
+    const tecla = this.keyboardMap[key]
 
-  keyboard_event(key: string) {
-    switch (key) {
-      case 'ArrowRight':
-        console.log('right')
-        break
-      case 'ArrowLeft':
-        console.log('left')
-        break
-      case 'ArrowUp':
-        console.log('up')
-        break
-      case 'ArrowDown':
-        console.log('down')
-        break
+    if (tecla == BombermanKey.LEFT) {
+      console.log({ ...this.keyboardMap, Tecla: tecla })
+    } else if (tecla == BombermanKey.RIGHT) {
+      console.log({ ...this.keyboardMap, Tecla: tecla })
+    } else if (tecla == BombermanKey.UP) {
+      console.log({ ...this.keyboardMap, Tecla: tecla })
+    } else if (tecla == BombermanKey.DOWN) {
+      console.log({ ...this.keyboardMap, Tecla: tecla })
+    }
+  }
+
+  keyboard_event_up(key: string) {
+    const tecla = this.keyboardMap[key]
+
+    if (tecla == BombermanKey.LEFT) {
+      console.log({ ...this.keyboardMap, Tecla: tecla })
+    } else if (tecla == BombermanKey.RIGHT) {
+      console.log({ ...this.keyboardMap, Tecla: tecla })
+    } else if (tecla == BombermanKey.UP) {
+      console.log({ ...this.keyboardMap, Tecla: tecla })
+    } else if (tecla == BombermanKey.DOWN) {
+      console.log({ ...this.keyboardMap, Tecla: tecla })
     }
   }
 
   draw(delta: number, ctx: CanvasRenderingContext2D) {
-    console.log('Delta Bomberman: ' + delta)
-    console.log('CTX Bomberman: ' + ctx)
+    const drawer = new Drawer(ctx, this.position, this.size, 'rect', 'yellow')
+    drawer.draw()
   }
+
+  update(delta: number) {}
 }
