@@ -1,8 +1,8 @@
 export enum BombermanKey {
-  UP,
-  DOWN,
-  LEFT,
-  RIGHT
+  UP = 1,
+  DOWN = 2,
+  LEFT = 3,
+  RIGHT = 4
 }
 
 export interface KeyboardMap {
