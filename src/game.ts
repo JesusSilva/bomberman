@@ -30,18 +30,19 @@ window.onload = () => {
 
   window.requestAnimationFrame(render)
 
-  document.body.addEventListener('keydown', (e) => {
+  document.body.addEventListener('keydown', (event: KeyboardEvent) => {
+    event.preventDefault()
     actors.forEach((actor) => {
       if (actor.keyboard_event_down) {
-        actor.keyboard_event_down(e.key)
+        actor.keyboard_event_down(event.key)
       }
     })
   })
 
-  document.body.addEventListener('keyup', (e) => {
+  document.body.addEventListener('keyup', (event: KeyboardEvent) => {
     actors.forEach((actor) => {
       if (actor.keyboard_event_up) {
-        actor.keyboard_event_up(e.key)
+        actor.keyboard_event_up(event.key)
       }
     })
   })
