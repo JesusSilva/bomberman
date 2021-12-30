@@ -7,7 +7,7 @@ export class Actor {
     this.position = position
   }
   draw(delta: number, ctx: CanvasRenderingContext2D) {}
-  update(delta: number) {}
-  keyboard_event_down?(key: string): void {}
+  update(delta: number, ctx: CanvasRenderingContext2D) {}
+  keyboard_event_down?(event: KeyboardEvent): void {}
   keyboard_event_up?(key: string): void {}
 }

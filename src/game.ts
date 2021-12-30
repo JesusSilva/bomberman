@@ -10,8 +10,8 @@ window.onload = () => {
 
   const map = new Map(1)
   const fps = new FPSviewer({ x: 12.5, y: 25 + 12.5 })
-  const bombermanOne = new Bomberman({ x: 50, y: 50 }, Bomberman_one)
-  const bombermanTwo = new Bomberman({ x: 1050, y: 650 }, Bomberman_two)
+  const bombermanOne = new Bomberman({ x: 50, y: 50 }, Bomberman_one, 1)
+  const bombermanTwo = new Bomberman({ x: 1050, y: 650 }, Bomberman_two, 2)
 
   const actors: Actor[] = [map, fps, bombermanOne, bombermanTwo]
 
@@ -21,9 +21,10 @@ window.onload = () => {
     const delta = (time - lastFrame) / 1000
     lastFrame = time
 
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
     actors.forEach((actor: Actor) => {
       actor.draw(delta, ctx)
-      actor.update(delta)
+      actor.update(delta, ctx)
     })
     window.requestAnimationFrame(render)
   }
@@ -31,10 +32,9 @@ window.onload = () => {
   window.requestAnimationFrame(render)
 
   document.body.addEventListener('keydown', (event: KeyboardEvent) => {
-    event.preventDefault()
     actors.forEach((actor) => {
       if (actor.keyboard_event_down) {
-        actor.keyboard_event_down(event.key)
+        actor.keyboard_event_down(event)
       }
     })
   })

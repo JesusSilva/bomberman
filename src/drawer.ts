@@ -27,18 +27,7 @@ export class Drawer {
         this.ctx.beginPath()
         this.ctx.strokeStyle = this.color
         this.ctx.fillStyle = this.color
-        this.ctx.rect(
-          this.position.x,
-          this.position.y,
-          this.size.x,
-          this.size.y
-        )
-        this.ctx.fillRect(
-          this.position.x,
-          this.position.y,
-          this.size.x,
-          this.size.y
-        )
+        this.ctx.fillRect(this.position.x, this.position.y, this.size.x, this.size.y)
         this.ctx.stroke()
         break
       case 'arc':

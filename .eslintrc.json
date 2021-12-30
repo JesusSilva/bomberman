@@ -14,7 +14,7 @@
   "rules": {
     "complexity": [
       "warn",
-      10
+      20
     ],
     "prefer-const": "error",
     "@typescript-eslint/no-explicit-any": "off",
