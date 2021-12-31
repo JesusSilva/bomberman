@@ -1,0 +1,24 @@
+name: Publish to GitHub Pages
+on:
+  push:
+    branches:
+      - main
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build your repo
+        run: yarn run build
+
+      - name: Deploy to GitHub Pages
+        uses: faablecloud/action-deploy-gh-pages@v1
+        with:
+          dir: dist
+          branch: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}

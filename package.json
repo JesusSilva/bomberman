@@ -5,11 +5,16 @@
   "repository": "git@github.com:JesusSilva/bomberman.git",
   "license": "MIT",
   "scripts": {
-    "dev": "parcel index.html"
+    "dev": "clear && yarn run clear-cache && parcel index.html",
+    "clear-cache": "rimraf dist .parcel-cache",
+    "build": "yarn run clean && yarn run ghbuild",
+    "ghbuild": "parcel build --dist0dir docs --public-url /bomberman index.html",
+    "clean": "rimraf docs dist"
   },
   "dependencies": {
     "lodash": "^4.17.21",
     "parcel": "^2.0.1",
+    "rimraf": "^3.0.2",
     "rxjs": "^7.4.0",
     "typescript": "^4.5.4"
   },
