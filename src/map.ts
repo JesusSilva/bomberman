@@ -2,7 +2,8 @@
 import { Drawer } from './drawer'
 import { Position } from './classes/Position'
 
-const lvl1_wall = require('../public/images/sprites/levels/level_1/wall.png')
+// const lvl1_wall = require('../public/images/sprites/levels/level_1/barrier.png')
+const lvl1_wall = require('../public/images/sprites/levels/level_1/obstacle.png')
 const lvl1_grass = require('../public/images/sprites/levels/level_1/grass.png')
 const lvl1_obstacle = require('../public/images/sprites/levels/level_1/obstacle.png')
 const lvl1_barrier = require('../public/images/sprites/levels/level_1/barrier.png')

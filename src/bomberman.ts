@@ -40,11 +40,13 @@ export class Bomberman extends Actor {
   position: Position
   keyboardMap: KeyboardMap
   playerNumber: number
-  size: Position = { x: 50, y: 50 }
+  size: Position = { x: 40, y: 50 }
   speed: Position = { x: 50, y: 50 }
+  maxSpeed = 4
   keystrokes: any = {}
   lastKeyPress: string | null = null
   bomberman: HTMLImageElement = new Image()
+  animationFramesCount = 0
   animationIndex = 1
   lastDirection!: string
   pjsDrawed = false
@@ -122,66 +124,112 @@ export class Bomberman extends Actor {
         ? this.changePjImage(ctx, 'right')
         : this.playerNumber === 2
         ? this.changePjImage(ctx, 'left')
-        : ''
+        : null
       this.pjsDrawed = true
-    } else {
+    } // Note: Condition to paint the last position of the character just after executing ctx.clearRect().
+    else if (
+      !this.keystrokes['d'] &&
+      !this.keystrokes['ArrowRight'] &&
+      !this.keystrokes['a'] &&
+      !this.keystrokes['ArrowLeft'] &&
+      !this.keystrokes['s'] &&
+      !this.keystrokes['ArrowDown'] &&
+      !this.keystrokes['w'] &&
+      !this.keystrokes['ArrowUp']
+    ) {
       this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][1]
-      ctx.drawImage(this.bomberman, this.position.x, this.position.y, 40, 55)
+      ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
     }
   }
 
   update(delta: number, ctx: CanvasRenderingContext2D) {
+    // Note: Condition to change the character's image according to its direction.
     if (this.position.x < 1050 && (this.keystrokes['d'] || this.keystrokes['ArrowRight'])) {
-      this.position.x += 5
+      this.position.x += this.maxSpeed
       this.changePjImage(ctx, 'right')
     } else if (this.position.x > 50 && (this.keystrokes['a'] || this.keystrokes['ArrowLeft'])) {
-      this.position.x -= 5
+      this.position.x -= this.maxSpeed
       this.changePjImage(ctx, 'left')
     }
 
     if (this.position.y < 650 && (this.keystrokes['s'] || this.keystrokes['ArrowDown'])) {
-      this.position.y += 5
+      this.position.y += this.maxSpeed
       this.changePjImage(ctx, 'front')
     } else if (this.position.y > 50 && (this.keystrokes['w'] || this.keystrokes['ArrowUp'])) {
-      this.position.y -= 5
+      this.position.y -= this.maxSpeed
       this.changePjImage(ctx, 'back')
     }
+
+    // Note: Condition in case it hits the edges of the map that does not disappear when executing ctx.clearRect().
+    if (
+      (this.position.x >= 1050 && (this.keystrokes['d'] || this.keystrokes['ArrowRight'])) ||
+      (this.position.x <= 50 && (this.keystrokes['a'] || this.keystrokes['ArrowLeft'])) ||
+      (this.position.y >= 650 && (this.keystrokes['s'] || this.keystrokes['ArrowDown'])) ||
+      (this.position.y <= 50 && (this.keystrokes['w'] || this.keystrokes['ArrowUp']))
+    ) {
+      this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][1]
+      ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
+    }
+
+    // Note: Condition to paint the last position of the character just after executing ctx.clearRect().
+    if (
+      !this.keystrokes['d'] &&
+      !this.keystrokes['ArrowRight'] &&
+      !this.keystrokes['a'] &&
+      !this.keystrokes['ArrowLeft'] &&
+      !this.keystrokes['s'] &&
+      !this.keystrokes['ArrowDown'] &&
+      !this.keystrokes['w'] &&
+      !this.keystrokes['ArrowUp']
+    ) {
+      this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][1]
+      ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
+    }
+
+    this.controlAnimationFrame()
   }
 
   changePjImage(ctx: CanvasRenderingContext2D, direction: string): void {
     switch (direction) {
       case 'back':
         this.lastDirection = 'back'
-        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.animationIndex]
-        ctx.drawImage(this.bomberman, this.position.x, this.position.y, 40, 55)
+        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.calculateFrame() as number]
+        ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
         break
       case 'front':
         this.lastDirection = 'front'
-        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.animationIndex]
-        ctx.drawImage(this.bomberman, this.position.x, this.position.y, 40, 55)
+        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.calculateFrame() as number]
+        ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
         break
       case 'right':
         this.lastDirection = 'right'
-        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.animationIndex]
-        ctx.drawImage(this.bomberman, this.position.x, this.position.y, 40, 55)
+        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.calculateFrame() as number]
+        ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
         break
       case 'left':
         this.lastDirection = 'left'
-        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.animationIndex]
-        ctx.drawImage(this.bomberman, this.position.x, this.position.y, 40, 55)
+        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.calculateFrame() as number]
+        ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
         break
       default:
         break
     }
-    this.animationControl()
   }
 
-  animationControl() {
-    if (this.animationIndex <= 2) {
-      this.animationIndex++
+  controlAnimationFrame(): void {
+    if (this.animationFramesCount <= 29) {
+      this.animationFramesCount++
     } else {
-      this.animationIndex = 1
+      this.animationFramesCount = 1
     }
+  }
+
+  calculateFrame() {
+    if (this.animationFramesCount <= 10) return 1
+
+    if (this.animationFramesCount <= 20) return 2
+
+    if (this.animationFramesCount <= 30) return 3
   }
 
   formatKeystrokes() {
@@ -196,8 +244,6 @@ export class Bomberman extends Actor {
     if (Object.keys(this.keyboardMap).includes(event.key)) {
       this.handleKeyboardEvents(event.key, null)
     }
-
-    console.log(this.position.x)
   }
 
   keyboard_event_up(key: string) {
