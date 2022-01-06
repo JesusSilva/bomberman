@@ -8,12 +8,12 @@ window.onload = () => {
   const canvas = document.getElementById('canvas') as HTMLCanvasElement
   const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
 
-  const map = new Map(1)
-  const fps = new FPSviewer({ x: 12.5, y: 25 + 12.5 })
-  const bombermanOne = new Bomberman({ x: 50, y: 50 }, Bomberman_one, 1)
-  const bombermanTwo = new Bomberman({ x: 1050, y: 650 }, Bomberman_two, 2)
+  const map = new Map(ctx, 1)
+  const fps = new FPSviewer(ctx, { x: 12.5, y: 25 + 12.5 })
+  const bombermanOne = new Bomberman(ctx, { x: 50, y: 50 }, Bomberman_one, 1)
+  const bombermanTwo = new Bomberman(ctx, { x: 1050, y: 650 }, Bomberman_two, 2)
 
-  const actors: Actor[] = [map, fps, bombermanOne, bombermanTwo]
+  const actors: Actor[] = [bombermanOne, bombermanTwo]
 
   let lastFrame = 0
 
@@ -22,10 +22,15 @@ window.onload = () => {
     lastFrame = time
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+
+    map.draw()
+    fps.draw(delta)
+
     actors.forEach((actor: Actor) => {
-      actor.draw(delta, ctx)
-      actor.update(delta, ctx)
+      actor.draw()
+      actor.update()
     })
+
     window.requestAnimationFrame(render)
   }
 

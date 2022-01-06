@@ -2,6 +2,7 @@
 import { Actor } from './classes/Actor'
 import { Position } from './classes/Position'
 import { KeyboardMap } from './utils/keyboard-map'
+import { Map } from './map'
 
 const bomberman_white_front_1 = require('../public/images/sprites/bombermans/bomberman_white/bomberman_front/bomberman_1.png')
 const bomberman_white_front_2 = require('../public/images/sprites/bombermans/bomberman_white/bomberman_front/bomberman_2.png')
@@ -37,17 +38,16 @@ const bomberman_blue_dead_2 = require('../public/images/sprites/bombermans/bombe
 const bomberman_blue_dead_3 = require('../public/images/sprites/bombermans/bomberman_blue/bomberman_dead/bomberman_3.png')
 const bomberman_blue_dead_4 = require('../public/images/sprites/bombermans/bomberman_blue/bomberman_dead/bomberman_4.png')
 export class Bomberman extends Actor {
+  ctx: CanvasRenderingContext2D
+  map: Map
   position: Position
   keyboardMap: KeyboardMap
   playerNumber: number
-  size: Position = { x: 40, y: 50 }
-  speed: Position = { x: 50, y: 50 }
-  maxSpeed = 4
+  size: Position = { x: 50, y: 50 }
+  maxSpeed = 25
   keystrokes: any = {}
-  lastKeyPress: string | null = null
   bomberman: HTMLImageElement = new Image()
   animationFramesCount = 0
-  animationIndex = 1
   lastDirection!: string
   pjsDrawed = false
 
@@ -110,20 +110,22 @@ export class Bomberman extends Actor {
     }
   }
 
-  constructor(position: Position, keyboardMap: KeyboardMap, playerNumber: number) {
-    super(position)
+  constructor(ctx: CanvasRenderingContext2D, position: Position, keyboardMap: KeyboardMap, playerNumber: number) {
+    super(ctx, position)
+    this.ctx = ctx
     this.position = position
     this.keyboardMap = keyboardMap
     this.playerNumber = playerNumber
+    this.map = new Map(this.ctx, 1)
     this.formatKeystrokes()
   }
 
-  draw(delta: number, ctx: CanvasRenderingContext2D) {
+  draw() {
     if (!this.pjsDrawed) {
       this.playerNumber === 1
-        ? this.changePjImage(ctx, 'right')
+        ? this.changePjImage('right')
         : this.playerNumber === 2
-        ? this.changePjImage(ctx, 'left')
+        ? this.changePjImage('left')
         : null
       this.pjsDrawed = true
     } // Note: Condition to paint the last position of the character just after executing ctx.clearRect().
@@ -138,26 +140,22 @@ export class Bomberman extends Actor {
       !this.keystrokes['ArrowUp']
     ) {
       this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][1]
-      ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
+      this.ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
     }
   }
 
-  update(delta: number, ctx: CanvasRenderingContext2D) {
+  update() {
     // Note: Condition to change the character's image according to its direction.
     if (this.position.x < 1050 && (this.keystrokes['d'] || this.keystrokes['ArrowRight'])) {
-      this.position.x += this.maxSpeed
-      this.changePjImage(ctx, 'right')
+      this.changePjImage('right')
     } else if (this.position.x > 50 && (this.keystrokes['a'] || this.keystrokes['ArrowLeft'])) {
-      this.position.x -= this.maxSpeed
-      this.changePjImage(ctx, 'left')
+      this.changePjImage('left')
     }
 
     if (this.position.y < 650 && (this.keystrokes['s'] || this.keystrokes['ArrowDown'])) {
-      this.position.y += this.maxSpeed
-      this.changePjImage(ctx, 'front')
+      this.changePjImage('front')
     } else if (this.position.y > 50 && (this.keystrokes['w'] || this.keystrokes['ArrowUp'])) {
-      this.position.y -= this.maxSpeed
-      this.changePjImage(ctx, 'back')
+      this.changePjImage('back')
     }
 
     // Note: Condition in case it hits the edges of the map that does not disappear when executing ctx.clearRect().
@@ -168,7 +166,7 @@ export class Bomberman extends Actor {
       (this.position.y <= 50 && (this.keystrokes['w'] || this.keystrokes['ArrowUp']))
     ) {
       this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][1]
-      ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
+      this.ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
     }
 
     // Note: Condition to paint the last position of the character just after executing ctx.clearRect().
@@ -183,53 +181,8 @@ export class Bomberman extends Actor {
       !this.keystrokes['ArrowUp']
     ) {
       this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][1]
-      ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
+      this.ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
     }
-
-    this.controlAnimationFrame()
-  }
-
-  changePjImage(ctx: CanvasRenderingContext2D, direction: string): void {
-    switch (direction) {
-      case 'back':
-        this.lastDirection = 'back'
-        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.calculateFrame() as number]
-        ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
-        break
-      case 'front':
-        this.lastDirection = 'front'
-        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.calculateFrame() as number]
-        ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
-        break
-      case 'right':
-        this.lastDirection = 'right'
-        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.calculateFrame() as number]
-        ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
-        break
-      case 'left':
-        this.lastDirection = 'left'
-        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.calculateFrame() as number]
-        ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
-        break
-      default:
-        break
-    }
-  }
-
-  controlAnimationFrame(): void {
-    if (this.animationFramesCount <= 29) {
-      this.animationFramesCount++
-    } else {
-      this.animationFramesCount = 1
-    }
-  }
-
-  calculateFrame() {
-    if (this.animationFramesCount <= 10) return 1
-
-    if (this.animationFramesCount <= 20) return 2
-
-    if (this.animationFramesCount <= 30) return 3
   }
 
   formatKeystrokes() {
@@ -243,6 +196,138 @@ export class Bomberman extends Actor {
   keyboard_event_down(event: KeyboardEvent) {
     if (Object.keys(this.keyboardMap).includes(event.key)) {
       this.handleKeyboardEvents(event.key, null)
+    }
+
+    const hasCollided: boolean = this.map.checkColision(this.position, this.size, this.keystrokes)
+
+    const keystrokeCase =
+      this.keystrokes.d || this.keystrokes.ArrowRight
+        ? 'right'
+        : this.keystrokes.a || this.keystrokes.ArrowLeft
+        ? 'left'
+        : this.keystrokes.s || this.keystrokes.ArrowDown
+        ? 'down'
+        : this.keystrokes.w || this.keystrokes.ArrowUp
+        ? 'up'
+        : ''
+
+    switch (keystrokeCase) {
+      case 'right':
+        this.moveToRight(hasCollided)
+        break
+      case 'left':
+        this.moveToLeft(hasCollided)
+        break
+      case 'down':
+        this.moveToDown(hasCollided)
+        break
+      case 'up':
+        this.moveToUp(hasCollided)
+        break
+
+      default:
+        break
+    }
+    console.log(this.keystrokes)
+    this.controlAnimationFrame()
+  }
+
+  moveToRight(hasCollided: boolean) {
+    const col: number = this.position.x / this.size.x
+
+    if (!hasCollided && this.position.x < 1050 && (this.keystrokes['d'] || this.keystrokes['ArrowRight'])) {
+      this.changePjImage('right')
+      this.position.x += this.maxSpeed
+    } else if (
+      hasCollided &&
+      !Number.isInteger(col) &&
+      this.position.x < 1050 &&
+      (this.keystrokes['d'] || this.keystrokes['ArrowRight'])
+    ) {
+      this.position.x += this.maxSpeed
+    }
+  }
+
+  moveToLeft(hasCollided: boolean) {
+    const col: number = this.position.x / this.size.x
+
+    if (!hasCollided && this.position.x > 50 && (this.keystrokes['a'] || this.keystrokes['ArrowLeft'])) {
+      this.changePjImage('left')
+      this.position.x -= this.maxSpeed
+    } else if (
+      hasCollided &&
+      !Number.isInteger(col) &&
+      this.position.x > 50 &&
+      (this.keystrokes['a'] || this.keystrokes['ArrowLeft'])
+    ) {
+      this.position.x -= this.maxSpeed
+    }
+  }
+
+  moveToDown(hasCollided: boolean) {
+    const row: number = this.position.y / this.size.y
+
+    if (!hasCollided && this.position.y < 650 && (this.keystrokes['s'] || this.keystrokes['ArrowDown'])) {
+      this.changePjImage('front')
+      this.position.y += this.maxSpeed
+    } else if (
+      hasCollided &&
+      !Number.isInteger(row) &&
+      this.position.y < 650 &&
+      (this.keystrokes['s'] || this.keystrokes['ArrowDown'])
+    ) {
+      this.position.y += this.maxSpeed
+    }
+  }
+
+  moveToUp(hasCollided: boolean) {
+    const row: number = this.position.y / this.size.y
+
+    if (!hasCollided && this.position.y > 50 && (this.keystrokes['w'] || this.keystrokes['ArrowUp'])) {
+      this.changePjImage('back')
+      this.position.y -= this.maxSpeed
+    } else if (
+      hasCollided &&
+      !Number.isInteger(row) &&
+      this.position.y > 50 &&
+      (this.keystrokes['w'] || this.keystrokes['ArrowUp'])
+    ) {
+      this.position.y -= this.maxSpeed
+    }
+  }
+
+  controlAnimationFrame(): void {
+    if (this.animationFramesCount <= 2) {
+      this.animationFramesCount++
+    } else {
+      this.animationFramesCount = 1
+    }
+  }
+
+  changePjImage(direction: string): void {
+    switch (direction) {
+      case 'back':
+        this.lastDirection = 'back'
+        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.animationFramesCount]
+        this.ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
+        break
+      case 'front':
+        this.lastDirection = 'front'
+        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.animationFramesCount]
+        this.ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
+        break
+      case 'right':
+        this.lastDirection = 'right'
+        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.animationFramesCount]
+        this.ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
+        break
+      case 'left':
+        this.lastDirection = 'left'
+        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][this.animationFramesCount]
+        this.ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
+        break
+      default:
+        break
     }
   }
 
