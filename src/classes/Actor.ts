@@ -2,12 +2,15 @@
 import { Position } from './Position'
 
 export class Actor {
+  ctx: CanvasRenderingContext2D
   position: Position
-  constructor(position: Position) {
+
+  constructor(ctx: CanvasRenderingContext2D, position: Position) {
+    this.ctx = ctx
     this.position = position
   }
-  draw(delta: number, ctx: CanvasRenderingContext2D) {}
-  update(delta: number, ctx: CanvasRenderingContext2D) {}
-  keyboard_event_down?(event: KeyboardEvent): void {}
-  keyboard_event_up?(key: string): void {}
+  draw(): void {}
+  update(): void {}
+  keyboard_event_down(event: KeyboardEvent): void {}
+  keyboard_event_up(key: string): void {}
 }
