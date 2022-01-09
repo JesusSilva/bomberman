@@ -17,14 +17,14 @@ export class Bombs {
     }
     setTimeout(() => {
       this.detonate(row, col, playerNumber)
-    }, 1000)
+    }, 2000)
   }
 
   detonate(row: number, col: number, playerNumber: number) {
     this.map.detonateBomb(row, col)
     setTimeout(() => {
       this.bombQty[playerNumber] = 1
-    }, 1500)
+    }, 1000)
   }
 
   getBombsQty(playerNumber: number): number {

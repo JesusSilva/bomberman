@@ -200,6 +200,7 @@ export class Bomberman extends Actor {
       }
     } else {
       this.gameOver = true
+      this.deadAnimation()
     }
   }
 
@@ -387,5 +388,10 @@ export class Bomberman extends Actor {
     }
 
     return 0
+  }
+
+  deadAnimation() {
+    this.bomberman.src = this.assets[this.playerNumber]['dead'][this.animationFramesCount]
+    this.ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
   }
 }

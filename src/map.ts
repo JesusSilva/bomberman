@@ -197,6 +197,10 @@ export class Map {
     })
   }
 
+  changeLevel(level: number): void {
+    this.level = level
+  }
+
   checkColision(positionActor: Position, sizeActor: Position, keystroke: any): boolean {
     const row = positionActor.y / sizeActor.y
     const col = positionActor.x / sizeActor.x
@@ -332,6 +336,6 @@ export class Map {
       if (left === 0 || left === 3) {
         this.levels[this.level][row][col - 1] = 0
       }
-    }, 1500)
+    }, 1000)
   }
 }

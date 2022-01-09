@@ -2,23 +2,28 @@ import { Bomberman } from './bomberman'
 import { Bombs } from './bombs'
 import { Actor } from './classes/Actor'
 import { FPSviewer } from './fps-viewer'
+import { Levels } from './levels'
 import { Map } from './map'
 import { Bomberman_one, Bomberman_two } from './utils/keyboard-map'
 
 window.onload = () => {
-  const canvas = document.getElementById('canvas') as HTMLCanvasElement
   const canvasAux = document.getElementById('canvas-aux') as HTMLCanvasElement
-  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
   const ctxAux = canvasAux.getContext('2d') as CanvasRenderingContext2D
+  const bgAux = '#FFD737'
+  const colorTextAux = 'black'
+  const canvasGame = document.getElementById('canvas') as HTMLCanvasElement
+  const ctxGame = canvasGame.getContext('2d') as CanvasRenderingContext2D
 
-  const level = 1
-  const map = new Map(ctx, level)
-  const fps = new FPSviewer(ctxAux, { x: 12.5, y: 25 + 12 })
-  const bombs = new Bombs(map, level)
-  const bombermanOne = new Bomberman(ctx, map, { x: 50, y: 50 }, Bomberman_one, 1, bombs)
-  const bombermanTwo = new Bomberman(ctx, map, { x: 1050, y: 650 }, Bomberman_two, 2, bombs)
+  const levels = new Levels(ctxAux)
+  let level = levels.getLevel()
 
-  const actors: Actor[] = [bombermanOne, bombermanTwo]
+  let map = new Map(ctxGame, level)
+  let fps = new FPSviewer(ctxAux, { x: 12.5, y: 25 + 12 })
+  let bombs = new Bombs(map, level)
+  let bombermanOne = new Bomberman(ctxGame, map, { x: 50, y: 50 }, Bomberman_one, 1, bombs)
+  let bombermanTwo = new Bomberman(ctxGame, map, { x: 1050, y: 650 }, Bomberman_two, 2, bombs)
+
+  let actors: Actor[] = [bombermanOne, bombermanTwo]
 
   let lastFrame = 0
   let finish = false
@@ -27,42 +32,35 @@ window.onload = () => {
     const delta = (time - lastFrame) / 1000
     lastFrame = time
 
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+    ctxGame.clearRect(0, 0, ctxGame.canvas.width, ctxGame.canvas.height)
     ctxAux.clearRect(0, 0, ctxAux.canvas.width, ctxAux.canvas.height)
-    ctxAux.beginPath()
-    ctxAux.strokeStyle = '#EF7E00'
-    ctxAux.fillStyle = '#EF7E00'
-    ctxAux.fillRect(0, 0, 1150, 50)
-    ctxAux.stroke()
-    ctxAux.font = '24px Bomberman'
-    ctxAux.fillStyle = 'black'
-    ctxAux.fillText(`Level: ${level}`, 125, 25 + 12)
 
+    levels.draw(bgAux, colorTextAux)
+    fps.draw(delta, colorTextAux)
     map.draw()
-    fps.draw(delta)
 
     actors.forEach((actor: Actor) => {
       actor.draw()
       actor.update()
 
-      const playerNumber = actor.finishGame()
+      const playerFinishNumber = actor.finishGame()
 
-      if (playerNumber) {
-        window.cancelAnimationFrame(myRequest)
-        ctx.font = '80px Bomberman'
-        ctx.fillStyle = 'black'
-        ctx.fillText(`Jugador ${playerNumber === 1 ? 2 : 1}`, 330, 330)
-        ctx.fillText(`Gana la partida`, 155, 430)
-        ctx.fillStyle = 'white'
-        ctx.fillText(`Jugador ${playerNumber === 1 ? 2 : 1}`, 325, 325)
-        ctx.fillText(`Gana la partida`, 150, 425)
+      if (playerFinishNumber) {
+        // window.cancelAnimationFrame(myRequest)
+        ctxGame.font = '80px Bomberman'
+        ctxGame.fillStyle = 'black'
+        ctxGame.fillText(`Jugador ${playerFinishNumber === 1 ? 2 : 1}`, 330, 330)
+        ctxGame.fillText(`Gana la partida`, 155, 430)
+        ctxGame.fillStyle = 'white'
+        ctxGame.fillText(`Jugador ${playerFinishNumber === 1 ? 2 : 1}`, 325, 325)
+        ctxGame.fillText(`Gana la partida`, 150, 425)
         finish = true
       }
     })
 
-    if (!finish) {
-      window.requestAnimationFrame(render)
-    }
+    // if (!finish) {
+    window.requestAnimationFrame(render)
+    // }
   }
 
   const myRequest = window.requestAnimationFrame(render)
@@ -73,6 +71,21 @@ window.onload = () => {
         actor.keyboard_event_down(event)
       }
     })
+
+    levels.keyboard_event_down(event.key)
+
+    if (event.key === 'Enter') {
+      level = levels.getLevel()
+      console.log(level)
+
+      map = new Map(ctxGame, level)
+      fps = new FPSviewer(ctxAux, { x: 12.5, y: 25 + 12 })
+      bombs = new Bombs(map, level)
+      bombermanOne = new Bomberman(ctxGame, map, { x: 50, y: 50 }, Bomberman_one, 1, bombs)
+      bombermanTwo = new Bomberman(ctxGame, map, { x: 1050, y: 650 }, Bomberman_two, 2, bombs)
+
+      actors = [bombermanOne, bombermanTwo]
+    }
   })
 
   document.body.addEventListener('keyup', (event: KeyboardEvent) => {
