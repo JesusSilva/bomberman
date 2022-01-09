@@ -1,7 +1,10 @@
 {
   "name": "bomberman",
   "version": "1.0.0",
-  "repository": "git@github.com:JesusSilva/bomberman.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesussilva/bomberman.git"
+  },
   "license": "MIT",
   "scripts": {
     "dev": "clear && yarn run clear-cache && parcel index.html",
