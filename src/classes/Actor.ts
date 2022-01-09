@@ -13,4 +13,5 @@ export class Actor {
   update(): void {}
   keyboard_event_down(event: KeyboardEvent): void {}
   keyboard_event_up(key: string): void {}
+  finishGame(): any {}
 }
