@@ -3,6 +3,7 @@ import { Actor } from './classes/Actor'
 import { Position } from './classes/Position'
 import { KeyboardMap } from './utils/keyboard-map'
 import { Map } from './map'
+import { Bombs } from './bombs'
 
 const bomberman_white_front_1 = require('../public/images/sprites/bombermans/bomberman_white/bomberman_front/bomberman_1.png')
 const bomberman_white_front_2 = require('../public/images/sprites/bombermans/bomberman_white/bomberman_front/bomberman_2.png')
@@ -40,16 +41,18 @@ const bomberman_blue_dead_4 = require('../public/images/sprites/bombermans/bombe
 export class Bomberman extends Actor {
   ctx: CanvasRenderingContext2D
   map: Map
+  bombs: Bombs
   position: Position
   keyboardMap: KeyboardMap
   playerNumber: number
   size: Position = { x: 50, y: 50 }
-  maxSpeed = 25
+  maxSpeed = 50
   keystrokes: any = {}
   bomberman: HTMLImageElement = new Image()
   animationFramesCount = 0
   lastDirection!: string
   pjsDrawed = false
+  gameOver = false
 
   assets: { [key: number]: { [key: string]: { [key: number]: any } } } = {
     1: {
@@ -110,13 +113,21 @@ export class Bomberman extends Actor {
     }
   }
 
-  constructor(ctx: CanvasRenderingContext2D, position: Position, keyboardMap: KeyboardMap, playerNumber: number) {
+  constructor(
+    ctx: CanvasRenderingContext2D,
+    map: Map,
+    position: Position,
+    keyboardMap: KeyboardMap,
+    playerNumber: number,
+    bombs: Bombs
+  ) {
     super(ctx, position)
     this.ctx = ctx
     this.position = position
     this.keyboardMap = keyboardMap
     this.playerNumber = playerNumber
-    this.map = new Map(this.ctx, 1)
+    this.map = map
+    this.bombs = bombs
     this.formatKeystrokes()
   }
 
@@ -145,43 +156,50 @@ export class Bomberman extends Actor {
   }
 
   update() {
-    // Note: Condition to change the character's image according to its direction.
-    if (this.position.x < 1050 && (this.keystrokes['d'] || this.keystrokes['ArrowRight'])) {
-      this.changePjImage('right')
-    } else if (this.position.x > 50 && (this.keystrokes['a'] || this.keystrokes['ArrowLeft'])) {
-      this.changePjImage('left')
-    }
+    const row = this.position.y / this.size.y
+    const col = this.position.x / this.size.x
 
-    if (this.position.y < 650 && (this.keystrokes['s'] || this.keystrokes['ArrowDown'])) {
-      this.changePjImage('front')
-    } else if (this.position.y > 50 && (this.keystrokes['w'] || this.keystrokes['ArrowUp'])) {
-      this.changePjImage('back')
-    }
+    if (this.map.checkStillAlive(row, col) && !this.gameOver) {
+      // Note: Condition to change the character's image according to its direction.
+      if (this.position.x < 1050 && (this.keystrokes['d'] || this.keystrokes['ArrowRight'])) {
+        this.changePjImage('right')
+      } else if (this.position.x > 50 && (this.keystrokes['a'] || this.keystrokes['ArrowLeft'])) {
+        this.changePjImage('left')
+      }
 
-    // Note: Condition in case it hits the edges of the map that does not disappear when executing ctx.clearRect().
-    if (
-      (this.position.x >= 1050 && (this.keystrokes['d'] || this.keystrokes['ArrowRight'])) ||
-      (this.position.x <= 50 && (this.keystrokes['a'] || this.keystrokes['ArrowLeft'])) ||
-      (this.position.y >= 650 && (this.keystrokes['s'] || this.keystrokes['ArrowDown'])) ||
-      (this.position.y <= 50 && (this.keystrokes['w'] || this.keystrokes['ArrowUp']))
-    ) {
-      this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][1]
-      this.ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
-    }
+      if (this.position.y < 650 && (this.keystrokes['s'] || this.keystrokes['ArrowDown'])) {
+        this.changePjImage('front')
+      } else if (this.position.y > 50 && (this.keystrokes['w'] || this.keystrokes['ArrowUp'])) {
+        this.changePjImage('back')
+      }
 
-    // Note: Condition to paint the last position of the character just after executing ctx.clearRect().
-    if (
-      !this.keystrokes['d'] &&
-      !this.keystrokes['ArrowRight'] &&
-      !this.keystrokes['a'] &&
-      !this.keystrokes['ArrowLeft'] &&
-      !this.keystrokes['s'] &&
-      !this.keystrokes['ArrowDown'] &&
-      !this.keystrokes['w'] &&
-      !this.keystrokes['ArrowUp']
-    ) {
-      this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][1]
-      this.ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
+      // Note: Condition in case it hits the edges of the map that does not disappear when executing ctx.clearRect().
+      if (
+        (this.position.x >= 1050 && (this.keystrokes['d'] || this.keystrokes['ArrowRight'])) ||
+        (this.position.x <= 50 && (this.keystrokes['a'] || this.keystrokes['ArrowLeft'])) ||
+        (this.position.y >= 650 && (this.keystrokes['s'] || this.keystrokes['ArrowDown'])) ||
+        (this.position.y <= 50 && (this.keystrokes['w'] || this.keystrokes['ArrowUp']))
+      ) {
+        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][1]
+        this.ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
+      }
+
+      // Note: Condition to paint the last position of the character just after executing ctx.clearRect().
+      if (
+        !this.keystrokes['d'] &&
+        !this.keystrokes['ArrowRight'] &&
+        !this.keystrokes['a'] &&
+        !this.keystrokes['ArrowLeft'] &&
+        !this.keystrokes['s'] &&
+        !this.keystrokes['ArrowDown'] &&
+        !this.keystrokes['w'] &&
+        !this.keystrokes['ArrowUp']
+      ) {
+        this.bomberman.src = this.assets[this.playerNumber][this.lastDirection][1]
+        this.ctx.drawImage(this.bomberman, this.position.x, this.position.y, this.size.x, this.size.y)
+      }
+    } else {
+      this.gameOver = true
     }
   }
 
@@ -196,40 +214,51 @@ export class Bomberman extends Actor {
   keyboard_event_down(event: KeyboardEvent) {
     if (Object.keys(this.keyboardMap).includes(event.key)) {
       this.handleKeyboardEvents(event.key, null)
+
+      if (event.key === 'Shift' || event.key === 'e') {
+        const row = this.position.y / this.size.y
+        const col = this.position.x / this.size.x
+        const bombsQty = this.bombs.getBombsQty(this.playerNumber)
+
+        if (bombsQty) {
+          this.bombs.put(row, col, this.playerNumber)
+        }
+      }
     }
 
-    const hasCollided: boolean = this.map.checkColision(this.position, this.size, this.keystrokes)
+    if (!this.gameOver) {
+      const hasCollided: boolean = this.map.checkColision(this.position, this.size, this.keystrokes)
 
-    const keystrokeCase =
-      this.keystrokes.d || this.keystrokes.ArrowRight
-        ? 'right'
-        : this.keystrokes.a || this.keystrokes.ArrowLeft
-        ? 'left'
-        : this.keystrokes.s || this.keystrokes.ArrowDown
-        ? 'down'
-        : this.keystrokes.w || this.keystrokes.ArrowUp
-        ? 'up'
-        : ''
+      const keystrokeCase =
+        this.keystrokes.d || this.keystrokes.ArrowRight
+          ? 'right'
+          : this.keystrokes.a || this.keystrokes.ArrowLeft
+          ? 'left'
+          : this.keystrokes.s || this.keystrokes.ArrowDown
+          ? 'down'
+          : this.keystrokes.w || this.keystrokes.ArrowUp
+          ? 'up'
+          : ''
 
-    switch (keystrokeCase) {
-      case 'right':
-        this.moveToRight(hasCollided)
-        break
-      case 'left':
-        this.moveToLeft(hasCollided)
-        break
-      case 'down':
-        this.moveToDown(hasCollided)
-        break
-      case 'up':
-        this.moveToUp(hasCollided)
-        break
+      switch (keystrokeCase) {
+        case 'right':
+          this.moveToRight(hasCollided)
+          break
+        case 'left':
+          this.moveToLeft(hasCollided)
+          break
+        case 'down':
+          this.moveToDown(hasCollided)
+          break
+        case 'up':
+          this.moveToUp(hasCollided)
+          break
 
-      default:
-        break
+        default:
+          break
+      }
+      this.controlAnimationFrame()
     }
-    console.log(this.keystrokes)
-    this.controlAnimationFrame()
   }
 
   moveToRight(hasCollided: boolean) {
@@ -350,5 +379,13 @@ export class Bomberman extends Actor {
     if (keyup) {
       this.keystrokes[keyup] = false
     }
+  }
+
+  finishGame(): number {
+    if (this.gameOver) {
+      return this.playerNumber
+    }
+
+    return 0
   }
 }
