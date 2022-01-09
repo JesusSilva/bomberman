@@ -1,12 +1,11 @@
 {
   "name": "bomberman",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "git@github.com:JesusSilva/bomberman.git",
   "license": "MIT",
   "scripts": {
     "dev": "clear && yarn run clear-cache && parcel index.html",
-    "clear-cache": "rimraf docs && rimraf dist && rimraf .parcel-cache",
+    "clear-cache": "rimraf docs dist .parcel-cache",
     "build": "yarn run clear-cache && yarn run ghbuild",
     "ghbuild": "parcel build --dist-dir docs --public-url /bomberman index.html"
   },
