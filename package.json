@@ -6,10 +6,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "clear && yarn run clear-cache && parcel index.html",
-    "clear-cache": "rimraf dist .parcel-cache",
-    "build": "yarn run clean && yarn run ghbuild",
-    "ghbuild": "parcel build --dist0dir docs --public-url /bomberman index.html",
-    "clean": "rimraf docs dist"
+    "clear-cache": "rimraf dist && rimraf .parcel-cache",
+    "build": "yarn run clear-cache && yarn run ghbuild",
+    "ghbuild": "parcel build --dist-dir docs --public-url /bomberman index.html"
   },
   "dependencies": {
     "lodash": "^4.17.21",
