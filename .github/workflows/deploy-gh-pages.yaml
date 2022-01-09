@@ -17,8 +17,8 @@ jobs:
         run: yarn run build
 
       - name: Deploy to GitHub Pages
-        uses: faablecloud/action-deploy-gh-pages@v1
+        uses: faablecloud/action-deploy-gh-pages@main
         with:
-          dir: dist
+          dir: docs
           branch: gh-pages
           token: ${{ secrets.GITHUB_TOKEN }}
