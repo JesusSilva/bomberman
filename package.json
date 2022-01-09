@@ -7,16 +7,14 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "clear && yarn run clear-cache && parcel index.html",
-    "build": "yarn run clear-cache && yarn run ghbuild",
+    "dev": "clear && yarn run clean && parcel index.html",
+    "build": "yarn run clean && yarn run ghbuild",
     "ghbuild": "parcel build --dist-dir docs --public-url /bomberman index.html",
-    "clear-cache": "rimraf docs && rimraf dist && rimraf .parcel-cache"
+    "clean": "rimraf docs && rimraf dist && rimraf .parcel-cache"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
     "parcel": "^2.0.1",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.4.0",
     "typescript": "^4.5.4"
   },
   "devDependencies": {
