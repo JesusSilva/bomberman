@@ -72,7 +72,14 @@ La motivación que me lleva a desarrollar este juego, es que fue uno de los jueg
 <p align="center">
   <img src="https://i.imgur.com/sdryaal.png" style="width: 100%">
 </p>
+#
 
+## Calculo de colisiones
+<p align="center">
+  <img src="https://i.imgur.com/eWAHbLl.png" style="width: 100%">
+</p>
+
+Para el cálculo de colisiones, me puse a pintar como sería la manera más óptima de calcular las colisiones. Una vez pensada esta formula lo siguiente que hice fue pensar en que tenia que tener en cuenta aparte de las colisiones, las casillas de alrededor del jugador.
 
 ## Instalación
 Para descargarnos el juego, instalarlo, deberemos ejecutar los siguientes comandos.
