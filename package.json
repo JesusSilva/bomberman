@@ -1,31 +1,28 @@
 {
   "name": "bomberman",
   "version": "1.0.0",
+  "description": "Game created with Canvas and Typescript",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel index.html",
+    "build": "npm run clean && npm run ghbuild",
+    "ghbuild": "parcel build --dist-dir docs --public-url /Bomberman index.html",
+    "clean": "rimraf docs dist"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jesussilva/bomberman.git"
   },
+  "keywords": ["Bomberman", "Canvas", "Typescript"],
+  "author": "Jesus Silva Mendez",
   "license": "MIT",
-  "scripts": {
-    "dev": "clear && yarn run clean && parcel index.html",
-    "build": "yarn run clean && yarn run ghbuild",
-    "ghbuild": "parcel build --dist-dir docs --public-url /bomberman index.html",
-    "clean": "rimraf docs && rimraf dist && rimraf .parcel-cache"
+  "bugs": {
+    "url": "https://github.com/jesussilva/bomberman/issues"
   },
+  "homepage": "https://github.com/jesussilva/bomberman#readme",
   "dependencies": {
     "parcel": "^2.0.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.5.4"
-  },
-  "devDependencies": {
-    "@types/webpack-env": "^1.16.3",
-    "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
-    "eslint": "^8.5.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.5.1"
   }
 }
