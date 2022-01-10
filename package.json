@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Game created with Canvas and Typescript",
   "scripts": {
-    "start": "npm run build && parcel index.html",
     "dev": "parcel index.html",
-    "build": "npm run clean && npm run ghbuild",
-    "ghbuild": "parcel build --dist-dir docs --public-url ./ index.html",
-    "clean": "rimraf docs dist .parcel-cache"
+    "start": "yarn run build && parcel ./docs/index.html",
+    "build": "yarn run clean && yarn run ghbuild",
+    "clean": "rimraf docs dist .parcel-cache",
+    "ghbuild": "parcel build --dist-dir docs --public-url ./ index.html"
   },
   "repository": {
     "type": "git",
