@@ -123,18 +123,18 @@ yarn run clean
 
 ## Mapa de teclas
 
-| Tecla | Acción |
-| ------ | ------ |
-| 1 | Nivel 1 |
-| 2 | Nivel 2 |
-| Enter | Seleccionar Nivel |
+| Tecla  | Acción            |
+| ------ | ----------------- |
+| 1      | Nivel 1           |
+| 2      | Nivel 2           |
+| Enter  | Seleccionar Nivel |
 
 | Movimiento | Jugador 1 | Jugador 2 |
-| ------ | ------ | ------ |
-| Subir | ⬆ | W |
-| Derecha | ➡ | D |
-| Bajar | ⬇ | S |
-| Izquierda | ⬅ | L |
+| ---------- | --------- | --------- |
+| Subir      | ⬆        | W         |
+| Derecha    | ➡         | D         |
+| Bajar      | ⬇        | S         |
+| Izquierda  | ⬅        | L         |
 
 #
 
