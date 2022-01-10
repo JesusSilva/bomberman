@@ -3,17 +3,21 @@
   "version": "1.0.0",
   "description": "Game created with Canvas and Typescript",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run build && parcel index.html",
     "dev": "parcel index.html",
     "build": "npm run clean && npm run ghbuild",
-    "ghbuild": "parcel build --dist-dir docs --public-url /Bomberman index.html",
-    "clean": "rimraf docs dist"
+    "ghbuild": "parcel build --dist-dir docs --public-url ./ index.html",
+    "clean": "rimraf docs dist .parcel-cache"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jesussilva/bomberman.git"
   },
-  "keywords": ["Bomberman", "Canvas", "Typescript"],
+  "keywords": [
+    "Bomberman",
+    "Canvas",
+    "Typescript"
+  ],
   "author": "Jesus Silva Mendez",
   "license": "MIT",
   "bugs": {
