@@ -4,7 +4,7 @@
   "description": "Game created with Canvas and Typescript",
   "scripts": {
     "dev": "parcel index.html",
-    "start": "npm run build && parcel ./docs/index.html",
+    "start": "parcel serve -p $PORT index.html",
     "build": "npm run clean && npm run ghbuild",
     "clean": "rimraf docs dist .parcel-cache",
     "ghbuild": "parcel build --dist-dir docs --public-url ./ index.html"
